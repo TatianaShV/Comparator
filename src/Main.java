@@ -9,8 +9,22 @@ public class Main {
                 new Person("Gayle", "Yulya", 18),
                 new Person("von Wiesen", "Peter", 67)));
 
+        Comparator<Person> comparator = (o1, o2) -> {
+            int surname1 = o1.getSurname().split(" ").length;
+            int surname2 = o2.getSurname().split(" ").length;
+            if (surname1 >= 2 && surname2 >= 2) {
+                return Integer.compare(o1.getAge(), o2.getAge());
+            }
+            if (surname1 > surname2) {
+                return 1;
+            } else if (surname1 < surname2) {
+                return -1;
 
-        list.sort(new PersonComparator(2));
+            } else {
+                return Integer.compare(o1.getAge(), o2.getAge());
+            }
+        };
+        Collections.sort(list, comparator);
         System.out.println(list);
     }
 
